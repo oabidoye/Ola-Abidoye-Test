@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="container">
+    <div class="table-responsive">
+        <table id="salesTable" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Segment</th>
+                    <th>Country</th>
+                    <th>Product</th>
+                    <th>Discount Band</th>
+                    <th>Units Sold</th>
+                    <th>Manufacturing Price</th>
+                    <th>Sale Price</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="//cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#salesTable').DataTable(
+                {
+                    ajax: {
+                        url: "Home/GetSalesList",
+                        type: "POST",
+                    },
+                    processing: true,
+                    serverSide: true,
+                    filter: true,
+                    columns: [
+                        { data: "Segment", name: "Segment" },
+                        { data: "Country", name: "Country" },
+                        { data: "Product", name: "Product" },
+                        { data: "Discount Band", name: "Discount Band" },
+                        { data: "Units Sold", name: "Units Sold" },
+                        { data: "Manufacturing Price", name: "Manufacturing Price" },
+                        { data: "Sale Price", name: "Sale Price" },
+                        { data: "Date", name: "Date" },
+                    ]
+                }
+            );
+        });
+    </script>
+}
+
+<link href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css" rel=" stylesheet" />
